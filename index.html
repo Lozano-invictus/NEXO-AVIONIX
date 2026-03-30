@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXO AVIONIX — Gestión · Reservas · Vuelos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     LOADER / SPLASH SCREEN
+     ============================================================ -->
+<div id="loader">
+  <div class="loader-bg-decor"></div>
+  <div class="loader-clouds">
+    <div class="loader-cloud cloud-1"></div>
+    <div class="loader-cloud cloud-2"></div>
+    <div class="loader-cloud cloud-3"></div>
+  </div>
+  
+  <div class="loader-plane-container">
+    <div class="custom-plane">
+      <div class="plane-fuselage">
+        <div class="plane-nose"></div>
+        <div class="plane-windows">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="plane-tail-fin"></div>
+      <div class="plane-engines">
+        <div class="engine"></div>
+        <div class="engine"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-brand">
+    <h1>NEXO AVIONIX</h1>
+    <p>GESTIÓN · RESERVAS · VUELOS</p>
+  </div>
+  <div class="loader-progress">
+    <div class="loader-progress-bar"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AUTH VIEWS
+     ============================================================ -->
+
+<!-- LOGIN -->
+<div id="login-view" class="view auth-view">
+  <nav class="auth-navbar">
+    <div class="brand-logo">
+      <svg viewBox="0 0 24 24" class="logo-svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span>NEXO <b>AVIONIX</b></span>
+    </div>
+  </nav>
+  <div class="auth-content">
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <h1>Accede a tu<br><span>cuenta</span></h1>
+        <div class="brand-tag">NEXO AVIONIX</div>
+        <p>Gestiona tus vuelos y reservas con la tecnología líder en navegación aérea nacional.</p>
+        <div class="auth-features-mini">
+          <div class="feat-item"><span>✓</span> Reserva en segundos</div>
+          <div class="feat-item"><span>✓</span> Control total de tiquetes</div>
+          <div class="feat-item"><span>✓</span> Soporte especializado</div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form-container">
+        <div class="form-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2>Iniciar Sesión</h2>
+        <p class="form-desc">Ingresa tus credenciales para acceder a la plataforma.</p>
+        <form id="login-form" class="refined-form">
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="login-email" placeholder="nombre@correo.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="login-password" placeholder="••••••••" required />
+              <button type="button" class="pw-toggle" id="toggle-login-pw">👁</button>
+            </div>
+          </div>
+          <div class="form-options">
+            <label class="check-container">
+              <input type="checkbox"> 
+              <span class="checkmark"></span>
+              Recordarme
+            </label>
+            <a href="#" id="go-forgot" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button type="submit" class="btn-brand">ENTRAR AHORA</button>
+          
+          <div class="auth-footer">
+            <p>¿No tienes cuenta? <a href="#" id="go-register">Regístrate gratis</a></p>
+            <div class="divider"><span>o también</span></div>
+            <button type="button" class="btn-guest-outline" id="btn-guest">Continuar como Invitado</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div id="register-view" class="view auth-view">
+  <nav class="auth-navbar">
+    <div class="brand-logo">
+      <svg viewBox="0 0 24 24" class="logo-svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span>NEXO <b>AVIONIX</b></span>
+    </div>
+  </nav>
+  <div class="auth-content">
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <h1>Crea tu<br><span>Cuenta</span></h1>
+        <div class="brand-tag">NEXO AVIONIX</div>
+        <p>Únete a la red más avanzada de gestión aérea nacional.</p>
+        <div class="auth-features-mini">
+          <div class="feat-item"><span>✓</span> Acceso exclusivo</div>
+          <div class="feat-item"><span>✓</span> Beneficios VIP</div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form-container">
+        <div class="form-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <h2>Registro</h2>
+        <p class="form-desc">Crea tu cuenta gratis en pocos segundos.</p>
+        <form id="register-form" class="refined-form">
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label>Nombre</label>
+              <div class="input-wrapper-simple">
+                <input type="text" id="reg-name" placeholder="Juan" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Apellido</label>
+              <div class="input-wrapper-simple">
+                <input type="text" placeholder="Pérez" required />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="reg-email" placeholder="juan@correo.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="reg-password" placeholder="Mínimo 8 caracteres" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-brand">CREAR CUENTA</button>
+          <div class="auth-footer">
+            <p>¿Ya tienes cuenta? <a href="#" id="back-to-login">Inicia sesión</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFY OTP -->
+<div id="verify-view" class="view auth-view">
+  <div class="auth-content">
+    <div class="auth-right" style="flex:1">
+      <div class="auth-form-container text-center">
+        <div class="otp-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h2>Verifica tu Correo</h2>
+        <p class="form-desc">Ingresa el código de 6 dígitos que enviamos a tu email.</p>
+        <div class="otp-input-group">
+          <input type="text" class="otp-input" maxlength="1">
+          <input type="text" class="otp-input" maxlength="1">
+          <input type="text" class="otp-input" maxlength="1">
+          <input type="text" class="otp-input" maxlength="1">
+          <input type="text" class="otp-input" maxlength="1">
+          <input type="text" class="otp-input" maxlength="1">
+        </div>
+        <div class="otp-meta">
+          <span id="otp-timer">05:00</span>
+          <p>¿No recibiste el código? <a href="#">Reenviar</a></p>
+        </div>
+        <button id="verify-otp-btn" class="btn-brand">VERIFICAR CÓDIGO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div id="success-view" class="view auth-view">
+  <div class="auth-content center-all">
+    <div class="success-card">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h1 class="color-brand">¡Registro Exitoso!</h1>
+      <p>Bienvenido a bordo, <b id="success-name"></b></p>
+      <div class="success-details">
+        <p id="success-email"></p>
+        <span>Cuenta Activa ✓</span>
+      </div>
+      <button id="go-home" class="btn-brand">IR AL PANEL PRINCIPAL</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CLIENT VIEW (Main Application)
+     ============================================================ -->
+<div id="client-view" class="view">
+  <nav class="client-navbar">
+    <div class="nav-container">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" class="logo-svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        <span>NEXO <b>AVIONIX</b></span>
+      </div>
+      <div class="main-nav-links">
+        <a href="#" class="nav-stage-link active" data-stage="home">Inicio</a>
+        <a href="#" class="nav-stage-link" data-stage="results">Vuelos</a>
+        <a href="#" class="nav-stage-link hidden" id="nav-profile-link" data-stage="dashboard">Mi Perfil</a>
+      </div>
+      <div class="nav-right">
+        <div id="guest-buttons">
+          <button id="btn-login-header" class="btn-nav-plain">Login</button>
+        </div>
+        <div id="user-section" class="hidden user-pill">
+          <div id="user-avatar" class="avatar-mini">U</div>
+          <span id="user-display-name"></span>
+          <button id="btn-logout-client" class="btn-logout">Salir</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- STAGE 1: HOME -->
+  <div id="stage-home" class="client-stage active">
+    <div class="stage-hero">
+      <div class="hero-text">
+        <h1>Encuentra tu próximo vuelo</h1>
+        <p>Gestiona tus viajes con la tecnología de Nexo Avionix</p>
+      </div>
+    </div>
+    <div class="search-section">
+      <div class="search-card-refined">
+        <div class="trip-type-tabs">
+          <button class="trip-tab active">Ida y Vuelta</button>
+          <button class="trip-tab">Solo Ida</button>
+        </div>
+        <div class="search-grid-inputs">
+          <div class="input-field"><label>Origen</label><input type="text" id="search-origin" placeholder="Ej: Bogotá" /></div>
+          <div class="input-field"><label>Destino</label><input type="text" id="search-dest" placeholder="Ej: Cartagena" /></div>
+          <div class="input-field"><label>Fecha Salida</label><input type="date" /></div>
+          <div class="input-field"><label>Pasajeros</label><select><option>1 Pasajero</option><option>2 Pasajeros</option></select></div>
+          <button id="btn-search-main" class="btn-search-action">BUSCAR VUELOS</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="destinations-preview">
+      <div class="section-container">
+        <h3>Destinos Recomendados</h3>
+        <div class="dest-grid">
+          <div class="dest-card"><div class="img-placeholder" style="background:#A8DADC"></div><h4>Santa Marta</h4><p>Desde $150.000</p></div>
+          <div class="dest-card"><div class="img-placeholder" style="background:#457B9D"></div><h4>Medellín</h4><p>Desde $120.000</p></div>
+          <div class="dest-card"><div class="img-placeholder" style="background:#1D3557"></div><h4>San Andrés</h4><p>Desde $290.000</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 2: RESULTS -->
+  <div id="stage-results" class="client-stage">
+    <div class="booking-container">
+      <div class="booking-layout-refined">
+        <aside class="booking-filters">
+          <div class="filter-card-standard">
+            <h4>Filtros de Búsqueda</h4>
+            <div class="filter-group"><label>Escalas</label><div><input type="checkbox" checked> Directo</div></div>
+            <div class="filter-group"><label>Precio Máx.</label><input type="range" min="100" max="1000"></div>
+          </div>
+        </aside>
+        <main class="booking-results-area">
+          <div class="results-meta">
+            <h2>BOG ➔ CTG</h2>
+            <p>2 resultados encontrados — 15 Mayo 2026</p>
+          </div>
+          <div class="flight-cards-list">
+            <div class="flight-card-refined">
+              <div class="card-left">
+                <div class="time-block"><b>06:00 AM</b> — <b>07:30 AM</b></div>
+                <div class="carrier-info">Nexo Avionix • Vuelo NX-102 • Económico</div>
+              </div>
+              <div class="card-right">
+                <div class="price-bubble">$189.000</div>
+                <button class="btn-select-flight-new">Seleccionar</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 3: SEATS -->
+  <div id="stage-seats" class="client-stage">
+    <div class="booking-container">
+      <div class="seats-header">
+        <h2>Selecciona tu Asiento</h2>
+        <p>Asegura la mejor vista para tu viaje a Cartagena.</p>
+      </div>
+      <div class="seats-layout">
+        <div class="fuselage-visual">
+          <div class="plane-nose-visual"></div>
+          <div id="plane-seats-grid"></div>
+          <div class="plane-tail-visual"></div>
+        </div>
+        <aside class="seats-summary">
+          <div class="summary-card-standard">
+            <h3>Resumen</h3>
+            <div class="summary-item"><span>Vuelo:</span> <span>BOG-CTG</span></div>
+            <div class="summary-item"><span>Asiento:</span> <b id="current-seat-sel">---</b></div>
+            <hr>
+            <div class="summary-total">Total: $189.000</div>
+            <button class="btn-continue-booking btn-brand-full">CONTINUAR AL PAGO</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 4: CHECKOUT -->
+  <div id="stage-checkout" class="client-stage">
+    <div class="checkout-layout">
+      <div class="checkout-card">
+        <h2>Método de Pago</h2>
+        <div class="payment-selector">
+          <button class="pay-method active">Tarjeta Crédito/Débito</button>
+          <button class="pay-method">PSE / Transferencia</button>
+        </div>
+        <form class="payment-form">
+          <div class="form-group"><label>Número de Tarjeta</label><input type="text" placeholder="0000 0000 0000 0000" /></div>
+          <div class="form-row-grid">
+            <div class="form-group"><label>Expiración</label><input type="text" placeholder="MM/YY" /></div>
+            <div class="form-group"><label>CVC</label><input type="text" placeholder="123" /></div>
+          </div>
+          <button id="btn-final-confirm" class="btn-brand">PROCESAR PAGO</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 5: DASHBOARD -->
+  <div id="stage-dashboard" class="client-stage">
+    <div class="dashboard-container">
+      <div class="dash-hero">
+        <div class="dash-user-card">
+          <div class="dash-avatar-large" id="dash-avatar">U</div>
+          <div class="dash-user-meta">
+            <h2 id="user-full-name">Usuario</h2>
+            <p id="user-email-display">usuario@nexo.com</p>
+          </div>
+          <div class="dash-user-stats">
+            <div class="stat-item"><b>8</b><span>Vuelos</span></div>
+            <div class="stat-item"><b>1200</b><span>Millas</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-bookings">
+        <h3>Próximas Reservas</h3>
+        <div class="ticket-status-card">
+          <div class="ticket-main">
+            <div class="ticket-route">BOG <span>➔</span> CTG</div>
+            <div class="ticket-date">15 Abril, 2026 • 06:00 AM</div>
+          </div>
+          <div class="ticket-badge">CONFIRMADO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       REFINED FOOTER
+       ============================================================ -->
+  <div class="refined-footer-wrapper">
+    <div class="contact-strip">
+      <div class="contact-item">
+        <div class="icon-circle shadow-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="contact-info">
+          <span>¿Cómo podemos ayudarte?</span>
+          <h4>Escríbenos <b>24/7</b></h4>
+          <button class="btn-contact-red">Contáctanos</button>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon-circle shadow-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="contact-info">
+          <span>Cuando lo necesites</span>
+          <h4>Te estamos escuchando</h4>
+          <p>+57 301 456 78 90</p>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="main-brand-footer">
+      <div class="footer-grid">
+        <div class="footer-brand-side">
+          <div class="brand-logo-full">
+            <span class="navy">NEXO</span> <span class="red">AVIONIX</span>
+          </div>
+          <div class="brand-tagline">GESTIÓN · RESERVAS · VUELOS</div>
+          <p class="brand-desc-mini">Plataforma web integral para la gestión de reservas, tiquetes y paquetes turísticos de una aerolínea nacional.</p>
+          <div class="social-circles">
+            <span class="social-icon">f</span>
+            <span class="social-icon">𝕏</span>
+            <span class="social-icon">O</span>
+            <span class="social-icon">in</span>
+            <span class="social-icon">w</span>
+          </div>
+          <div class="footer-direct-contact">
+            <div>📞 +57 301 456 78 90</div>
+            <div>✉ contacto@nexoavionix.com</div>
+          </div>
+        </div>
+        
+        <div class="footer-links-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li>Reserva de Vuelos</li>
+            <li>Compra de Tiquetes</li>
+            <li>Gestión de Clientes</li>
+            <li>Control de Vuelos</li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Servicios VIP</h4>
+          <ul>
+            <li>Primera Clase</li>
+            <li>Clase Ejecutiva</li>
+            <li>Alojamiento</li>
+            <li>Transporte</li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Paquetes</h4>
+          <ul>
+            <li>Vuelos Nacionales</li>
+            <li>Internacionales</li>
+            <li>Combinados</li>
+            <li>Soporte</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-copyright">
+        <div class="copy-text">© Copyright 2026 — NEXO AVIONIX. Todos los derechos reservados.</div>
+        <div class="footer-bottom-nav">
+          <a href="#">Términos de Uso</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Soporte</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
