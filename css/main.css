@@ -1,0 +1,8 @@
+/* Nexo Avionix — hoja principal (importa capas por dominio) */
+@import './00-variables.css';
+@import './01-base.css';
+@import './02-loader.css';
+@import './03-auth.css';
+@import './04-client.css';
+@import './05-footer.css';
+@import './06-admin.css';

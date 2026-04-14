@@ -1,0 +1,68 @@
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--honeydew);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: 0.8s ease-in-out;
+}
+#loader.fade-out { opacity: 0; visibility: hidden; }
+
+.loader-plane-container {
+  position: relative; width: 300px; height: 150px;
+  animation: floatPlane 3s ease-in-out infinite;
+  display: flex; align-items: center; justify-content: center;
+}
+
+@keyframes floatPlane {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+.custom-plane {
+  position: relative; width: 180px; height: 60px;
+}
+.plane-fuselage {
+  position: absolute; top: 15px; left: 10px;
+  width: 150px; height: 35px;
+  background: white; border: 2px solid #b0c8d4;
+  border-radius: 0 30px 30px 10px;
+  z-index: 2; overflow: hidden;
+}
+.plane-nose {
+  position: absolute; right: 0; top: 0;
+  width: 30px; height: 100%;
+  background: #c6dde3; border-radius: 0 50% 50% 0;
+}
+.plane-windows {
+  position: absolute; top: 10px; left: 30px;
+  display: flex; gap: 4px;
+}
+.plane-windows span { width: 4px; height: 5px; background: var(--cerulean); border-radius: 2px; opacity: 0.6; }
+
+.plane-tail-fin {
+  position: absolute; top: -5px; left: 5px;
+  width: 35px; height: 40px;
+  background: var(--oxford-navy);
+  clip-path: polygon(100% 100%, 0% 100%, 30% 0%);
+  z-index: 1;
+}
+
+.plane-engines .engine {
+  position: absolute; bottom: 5px; width: 15px; height: 12px;
+  background: #c0ccd2; border-radius: 0 0 5px 5px;
+}
+.engine:nth-child(1) { left: 50px; }
+.engine:nth-child(2) { left: 80px; }
+
+.loader-clouds { position: absolute; inset: 0; pointer-events: none; }
+.loader-cloud { position: absolute; background: rgba(168, 218, 220, 0.4); border-radius: 50px; animation: drift 10s linear infinite; }
+.cloud-1 { width: 100px; height: 30px; top: 20%; right: -120px; animation-duration: 8s; }
+.cloud-2 { width: 150px; height: 40px; top: 50%; right: -200px; animation-duration: 12s; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-120vw); } }
+
+.loader-brand { text-align: center; margin-top: 20px; }
+.loader-brand h1 { font-size: 28px; font-weight: 800; color: var(--oxford-navy); letter-spacing: 5px; }
+.loader-brand p { font-size: 11px; font-weight: 600; color: var(--cerulean); letter-spacing: 4px; margin-top: 5px; }
+
+.loader-progress { width: 220px; height: 3px; background: rgba(0,0,0,0.05); border-radius: 3px; margin-top: 30px; overflow: hidden; }
+.loader-progress-bar { width: 0%; height: 100%; background: var(--gradient-nav); animation: fillProgress 3s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes fillProgress { to { width: 100%; } }

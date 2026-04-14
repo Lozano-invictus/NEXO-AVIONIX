@@ -1,0 +1,21 @@
+/* Design tokens — Nexo Avionix */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --punch-red: #E63946;
+  --honeydew: #F1FAEE;
+  --frosted-blue: #A8DADC;
+  --cerulean: #457B9D;
+  --oxford-navy: #1D3557;
+
+  --bg-primary: var(--honeydew);
+  --text-primary: var(--oxford-navy);
+  --text-dim: #5a7a8a;
+
+  --gradient-nav: linear-gradient(135deg, #457B9D, #1D3557);
+  --gradient-accent: linear-gradient(135deg, #A8DADC, #457B9D);
+
+  --shadow-standard: 0 10px 30px rgba(29, 53, 87, 0.08);
+  --radius-std: 12px;
+  --radius-lg: 20px;
+}

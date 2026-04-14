@@ -1,0 +1,13 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+button { cursor: pointer; border: none; font-family: inherit; transition: 0.3s; }
+input, select { font-family: inherit; outline: none; transition: 0.3s; }
+
+.view { display: none; min-height: 100vh; }
+.view.active { display: block; }
+.hidden { display: none !important; }
+
+.brand-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; color: var(--oxford-navy); letter-spacing: -0.5px; }
+.brand-logo b { color: var(--cerulean); }
+.logo-svg { width: 32px; height: 32px; fill: var(--cerulean); }

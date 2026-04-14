@@ -1,0 +1,45 @@
+.refined-footer-wrapper { margin-top: 0; background: linear-gradient(180deg, var(--oxford-navy) 0%, #152238 100%); position: relative; }
+.refined-footer-wrapper::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cerulean), var(--frosted-blue), var(--punch-red)); }
+.contact-strip { display: flex; max-width: 1200px; margin: 0 auto; background: rgba(255,255,255,0.03); border-radius: 0; border: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.contact-item { flex: 1; display: flex; align-items: center; gap: 25px; padding: 40px; border-right: 1px solid rgba(255,255,255,0.08); }
+.contact-item:last-child { border-right: none; }
+.icon-circle { width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--frosted-blue); border: 2px solid rgba(168,218,220,0.3); flex-shrink: 0; }
+.icon-circle svg { width: 30px; }
+.shadow-accent { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); }
+.contact-info span { font-size: 13px; color: rgba(255,255,255,0.6); }
+.contact-info h4 { font-size: 22px; color: white; margin: 4px 0; }
+.contact-info h4 b { color: var(--frosted-blue); }
+.btn-contact-red { margin-top: 10px; padding: 10px 24px; background: var(--punch-red); color: white; border-radius: 8px; font-weight: 700; font-size: 13px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.btn-contact-red:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4); }
+
+.main-brand-footer { background: transparent; padding: 60px 40px 40px; border-top: none; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+.brand-logo-full { font-size: 32px; font-weight: 900; letter-spacing: -1px; }
+.brand-logo-full .navy { color: white; }
+.brand-logo-full .red { color: var(--punch-red); }
+.brand-tagline { color: var(--frosted-blue); font-size: 11px; font-weight: 700; letter-spacing: 4px; border-bottom: 2px solid rgba(168,218,220,0.3); display: inline-block; padding-bottom: 5px; margin: 10px 0 20px; }
+.brand-desc-mini { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 300px; margin-bottom: 25px; }
+
+.social-circles { display: flex; gap: 12px; margin-bottom: 25px; }
+.social-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: 0.3s; border: 1px solid rgba(168,218,220,0.2); }
+.social-icon:hover { transform: scale(1.1); background: var(--cerulean); border-color: var(--cerulean); }
+
+.footer-direct-contact { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 8px; }
+
+.footer-links-col h4 { font-size: 16px; color: white; margin-bottom: 25px; position: relative; }
+.footer-links-col h4::after { content: ""; position: absolute; left: 0; bottom: -8px; width: 30px; height: 3px; background: var(--cerulean); }
+.footer-links-col ul { list-style: none; }
+.footer-links-col li { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
+.footer-links-col li:hover { color: var(--frosted-blue); padding-left: 5px; }
+
+.footer-copyright { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-bottom-nav { display: flex; gap: 20px; }
+.footer-bottom-nav a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.footer-bottom-nav a:hover { color: var(--frosted-blue); }
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .contact-strip { flex-direction: column; }
+  .contact-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .contact-item:last-child { border-bottom: none; }
+}
