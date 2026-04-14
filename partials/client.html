@@ -1,0 +1,363 @@
+<div id="client-view" class="view">
+  <nav class="client-navbar">
+    <div class="nav-container">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" class="logo-svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        <span>NEXO <b>AVIONIX</b></span>
+      </div>
+      <div class="main-nav-links" id="main-nav">
+        <a href="#" class="nav-stage-link active" data-stage="home">Inicio</a>
+        <a href="#" class="nav-stage-link" data-stage="results">Vuelos</a>
+        <a href="#" class="nav-stage-link" data-stage="packages">Paquetes</a>
+        <a href="#" class="nav-stage-link" data-stage="promos">Promociones</a>
+        <a href="#" class="nav-stage-link" data-stage="help">Ayuda</a>
+        <a href="#" class="nav-stage-link hidden" id="nav-profile-link" data-stage="dashboard">Mi Perfil</a>
+      </div>
+      <div class="nav-right">
+        <div id="guest-buttons" class="guest-buttons-row">
+          <button type="button" id="btn-register-header" class="btn-nav-outline">Registrarse</button>
+          <button type="button" id="btn-login-header" class="btn-nav-plain">Iniciar sesión</button>
+        </div>
+        <div id="user-section" class="hidden user-pill">
+          <div id="user-avatar" class="avatar-mini">U</div>
+          <span id="user-display-name"></span>
+          <button type="button" id="btn-open-admin" class="hidden btn-admin-shortcut" title="Panel de operaciones">Operaciones</button>
+          <button type="button" id="btn-logout-client" class="btn-logout">Salir</button>
+        </div>
+      </div>
+      <button type="button" id="mobile-toggle" class="mobile-toggle" aria-label="Menú">☰</button>
+    </div>
+  </nav>
+
+  <!-- === INICIO (landing + buscador) === -->
+  <div id="stage-home" class="client-stage active">
+    <div class="stage-hero stage-hero--landing">
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">✈ Vuelos Nacionales · Desde cualquier ciudad de Colombia</p>
+          <h1>Tu próxima aventura empieza aquí</h1>
+          <p class="hero-sub">Descubre destinos increíbles a precios que te sorprenderán. Vuela a Cartagena, San Andrés, Medellín y más con las mejores tarifas del país.</p>
+          <div class="hero-badges">
+            <span class="hero-badge"><b>+50</b> destinos</span>
+            <span class="hero-badge"><b>24h</b> atención</span>
+            <span class="hero-badge"><b>0%</b> cargos ocultos</span>
+          </div>
+        </div>
+        <div class="search-section search-section--hero">
+          <div class="search-card-refined">
+            <div class="trip-type-tabs" role="tablist">
+              <button type="button" class="trip-tab active" data-trip="rt">Ida y vuelta</button>
+              <button type="button" class="trip-tab" data-trip="ow">Solo ida</button>
+            </div>
+            <div class="search-grid-inputs">
+              <div class="input-field"><label>Origen</label><input type="text" id="search-origin" placeholder="Ej: Bogotá (BOG)" autocomplete="off" /></div>
+              <div class="input-field"><label>Destino</label><input type="text" id="search-dest" placeholder="Ej: Cartagena (CTG)" autocomplete="off" /></div>
+              <div class="input-field" id="field-date-return-wrap">
+                <label>Ida · Regreso</label>
+                <div class="date-pair">
+                  <input type="date" id="search-date-out" />
+                  <input type="date" id="search-date-in" />
+                </div>
+              </div>
+              <div class="input-field"><label>Pasajeros</label><select id="search-passengers"><option value="1">1 Pasajero</option><option value="2">2 Pasajeros</option><option value="3">3 Pasajeros</option><option value="4">4 Pasajeros</option></select></div>
+              <button type="button" id="btn-search-main" class="btn-search-action">Buscar vuelos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-popular">
+      <div class="section-container">
+        <div class="section-head">
+          <h2>Vuelos populares</h2>
+          <p>Los destinos más buscados esta temporada</p>
+        </div>
+        <div class="dest-grid dest-grid--photos" id="popular-dest-grid">
+          <!-- Renderizado dinámico por render.js (precios de state) -->
+        </div>
+      </div>
+    </section>
+
+    <section class="value-props">
+      <div class="section-container value-props-grid">
+        <div class="value-card">
+          <div class="value-icon">✈</div>
+          <h3>Mejores precios</h3>
+          <p>Tarifas transparentes sin cargos ocultos en la búsqueda.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔒</div>
+          <h3>Pago seguro</h3>
+          <p>Procesamiento encriptado y métodos PSE y tarjeta.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <h3>Reserva rápida</h3>
+          <p>Flujo guiado: vuelo, asiento, datos y pago en minutos.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💬</div>
+          <h3>Soporte 24/7</h3>
+          <p>Equipo humano para cambios y atención al pasajero.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- === RESULTADOS === -->
+  <div id="stage-results" class="client-stage">
+    <div class="booking-container booking-container--top">
+      <div class="booking-layout-refined">
+        <aside class="booking-filters">
+          <div class="filter-card-standard">
+            <h4>Filtros</h4>
+            <div class="filter-group"><label>Escalas</label><div class="filter-checks"><label><input type="checkbox" checked /> Solo directo</label><label><input type="checkbox" /> 1 Escala</label></div></div>
+            <div class="filter-group"><label>Precio máximo (mil COP)</label><input type="range" class="filter-range" min="100" max="900" value="500" /></div>
+            <div class="filter-group"><label>Horario salida</label><select><option>Cualquiera</option><option>Mañana</option><option>Tarde</option><option>Noche</option></select></div>
+          </div>
+        </aside>
+        <main class="booking-results-area">
+          <div class="results-meta">
+            <h2 id="results-route-title">BOG → CTG</h2>
+            <p id="results-route-sub">Cargando resultados…</p>
+          </div>
+          <div class="flight-cards-list" id="flight-results-list">
+            <!-- Renderizado dinámico por render.js -->
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- === ASIENTOS + PASAJERO === -->
+  <div id="stage-seats" class="client-stage">
+    <div class="booking-container">
+      <div class="seats-header">
+        <h2>Asiento y datos del pasajero</h2>
+        <p id="seats-route-hint">Completa la información y elige tu lugar en cabina.</p>
+      </div>
+      <div class="seats-passenger-layout">
+        <div class="fuselage-visual fuselage-visual--section">
+          <div class="plane-nose-visual"></div>
+          <p class="cabin-label">Cabina económica</p>
+          <div id="plane-seats-grid"></div>
+          <div class="seat-legend">
+            <span><i class="lg-free"></i> Libre</span>
+            <span><i class="lg-sel"></i> Selección</span>
+            <span><i class="lg-occ"></i> Ocupado</span>
+          </div>
+          <div class="plane-tail-visual"></div>
+        </div>
+        <div class="passenger-stack">
+          <div class="summary-card-standard passenger-form-card">
+            <h3>Datos del pasajero</h3>
+            <div class="form-group"><label>Nombre completo</label><input type="text" id="px-name" placeholder="Como en el documento" /></div>
+            <div class="form-row-grid">
+              <div class="form-group"><label>Tipo doc.</label><select id="px-doc-type"><option value="CC">Cédula</option><option value="CE">C. Extranjería</option><option value="PA">Pasaporte</option></select></div>
+              <div class="form-group"><label>Número</label><input type="text" id="px-doc-number" placeholder="Sin puntos" /></div>
+            </div>
+            <div class="form-group"><label>Correo</label><input type="email" id="px-email" placeholder="correo@ejemplo.com" /></div>
+            <div class="form-group"><label>Teléfono</label><input type="tel" id="px-phone" placeholder="+57 …" /></div>
+          </div>
+          <div class="summary-card-standard trip-mini-summary">
+            <h3>Resumen</h3>
+            <div class="summary-item"><span>Vuelo</span> <b id="summary-flight-code">—</b></div>
+            <div class="summary-item"><span>Ruta</span> <span id="summary-route-mini">—</span></div>
+            <div class="summary-item"><span>Asiento</span> <b id="current-seat-sel">—</b></div>
+            <hr />
+            <div class="summary-total">Total: <span id="summary-price-seat">$0</span></div>
+            <button type="button" class="btn-continue-booking btn-brand-full">Continuar al pago</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === CHECKOUT / RESUMEN === -->
+  <div id="stage-checkout" class="client-stage">
+    <div class="checkout-hero">
+      <h1>Resumen de tu viaje</h1>
+      <p>Verifica los datos antes de pagar.</p>
+    </div>
+    <div class="checkout-summary-grid">
+      <article class="checkout-panel">
+        <h3><span class="panel-num">1</span> Vuelo</h3>
+        <p class="checkout-strong" id="ck-route">BOG → CTG</p>
+        <p class="checkout-muted" id="ck-flight-meta">NX-102 · Directo</p>
+        <p class="checkout-muted" id="ck-times">06:00 — 07:30 · <span id="ck-duration">1h 30m</span></p>
+      </article>
+      <article class="checkout-panel">
+        <h3><span class="panel-num">2</span> Pasajero</h3>
+        <p class="checkout-strong" id="ck-px-name">—</p>
+        <p class="checkout-muted" id="ck-px-doc">—</p>
+        <p class="checkout-muted" id="ck-px-contact">—</p>
+      </article>
+      <article class="checkout-panel checkout-panel--pay">
+        <h3><span class="panel-num">3</span> Pago</h3>
+        <div class="checkout-total-line"><span>Total</span> <strong id="ck-total">$0</strong></div>
+        <div class="payment-selector">
+          <button type="button" class="pay-method active">Tarjeta débito / crédito</button>
+          <button type="button" class="pay-method">PSE / transferencia</button>
+        </div>
+        <form class="payment-form">
+          <div class="form-group"><label>Número de tarjeta</label><input type="text" placeholder="0000 0000 0000 0000" autocomplete="cc-number" /></div>
+          <div class="form-row-grid">
+            <div class="form-group"><label>Vence</label><input type="text" placeholder="MM/YY" /></div>
+            <div class="form-group"><label>CVC</label><input type="text" placeholder="123" /></div>
+          </div>
+          <button type="button" id="btn-final-confirm" class="btn-brand btn-brand--pay">Pagar ahora</button>
+        </form>
+      </article>
+    </div>
+  </div>
+
+  <!-- === PERFIL CLIENTE === -->
+  <div id="stage-dashboard" class="client-stage">
+    <div class="dashboard-container">
+      <div class="dash-hero">
+        <div class="dash-user-card">
+          <div class="dash-avatar-large" id="dash-avatar">U</div>
+          <div class="dash-user-meta">
+            <h2 id="user-full-name">Usuario</h2>
+            <p id="user-email-display">usuario@nexo.com</p>
+          </div>
+          <div class="dash-user-stats">
+            <div class="stat-item"><b>8</b><span>Vuelos</span></div>
+            <div class="stat-item"><b>1200</b><span>Millas</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-bookings">
+        <h3>Mis reservas</h3>
+        <div id="user-bookings-list">
+          <!-- Renderizado dinámico por render.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === PAQUETES (sección aparte) === -->
+  <div id="stage-packages" class="client-stage">
+    <div class="section-page-head">
+      <h1>Paquetes turísticos</h1>
+      <p>Vuelo + estadía seleccionada en destinos Nexo Avionix.</p>
+    </div>
+    <div class="section-container package-grid-figma" id="packages-grid-dynamic">
+      <!-- Renderizado dinámico por render.js -->
+    </div>
+  </div>
+
+  <!-- === PROMOCIONES === -->
+  <div id="stage-promos" class="client-stage">
+    <div class="promo-hero">
+      <div class="section-container">
+        <h1>Promociones y alianzas</h1>
+        <p>Descuentos por temporada. Aplican términos en cada ruta.</p>
+      </div>
+    </div>
+    <div class="section-container promo-rows">
+      <div class="promo-banner">
+        <div>
+          <h2>15% en rutas Players</h2>
+          <p>Código <strong>NEXOPLAY</strong> en checkout (válido hasta agotar cupo).</p>
+        </div>
+        <button type="button" class="btn-search-action" data-to-results>Ver vuelos</button>
+      </div>
+      <div class="promo-cols">
+        <div class="promo-tile"><h4>Millas dobles</h4><p>Viajes entre semana BOG–MDE.</p></div>
+        <div class="promo-tile"><h4>Maletas gratis</h4><p>Reservas familiares (+3 pax).</p></div>
+        <div class="promo-tile"><h4>Upgrade cupo</h4><p>Sujeto a disponibilidad en mostrador.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === AYUDA === -->
+  <div id="stage-help" class="client-stage">
+    <div class="section-page-head">
+      <h1>Centro de ayuda</h1>
+      <p>Preguntas frecuentes y canales de atención.</p>
+    </div>
+    <div class="section-container help-layout">
+      <div class="help-faq">
+        <details open><summary>¿Puedo cambiar fechas?</summary><p>Sí, según tarifa. Revisa penalidades en "Mi perfil" o llámanos.</p></details>
+        <details><summary>¿Cómo facturo?</summary><p>Envía tu número de reserva a facturacion@nexoavionix.com</p></details>
+        <details><summary>Equipaje adicional</summary><p>Compra hasta 24h antes en la web o en aeropuerto.</p></details>
+      </div>
+      <aside class="help-card">
+        <h3>Atención al cliente</h3>
+        <p><strong>+57 301 456 78 90</strong></p>
+        <p>Lun–Dom 24/7</p>
+        <button type="button" class="btn-contact-red">Escríbenos</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- === FOOTER (sitio público) === -->
+  <div class="refined-footer-wrapper">
+    <div class="contact-strip">
+      <div class="contact-item">
+        <div class="icon-circle shadow-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="contact-info">
+          <span>Contáctanos</span>
+          <h4>Escríbenos <b>24/7</b></h4>
+          <button type="button" class="btn-contact-red">Chat / correo</button>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon-circle shadow-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="contact-info">
+          <span>Atención al cliente</span>
+          <h4>Te escuchamos</h4>
+          <p>+57 301 456 78 90</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="main-brand-footer">
+      <div class="footer-grid footer-grid--figma">
+        <div class="footer-brand-side">
+          <div class="brand-logo-full">
+            <span class="navy">NEXO</span> <span class="red">AVIONIX</span>
+          </div>
+          <div class="brand-tagline">GESTIÓN · RESERVAS · VUELOS</div>
+          <p class="brand-desc-mini">Sistema integral de reservas y operación para aerolínea nacional — Summer Ocean Breeze.</p>
+          <div class="social-circles">
+            <span class="social-icon">f</span>
+            <span class="social-icon">𝕏</span>
+            <span class="social-icon">in</span>
+          </div>
+        </div>
+        <div class="footer-links-col">
+          <h4>Nosotros</h4>
+          <ul><li>Quiénes somos</li><li>Flota</li><li>Sostenibilidad</li><li>Prensa</li></ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Ayuda</h4>
+          <ul><li>Centro de ayuda</li><li>Equipaje</li><li>Cambios y reembolsos</li><li>Estado de vuelo</li></ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Términos</h4>
+          <ul><li>Términos de uso</li><li>Privacidad</li><li>Contrato de transporte</li><li>Cookies</li></ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Nuestras redes</h4>
+          <ul><li>Instagram</li><li>Facebook</li><li>LinkedIn</li><li>YouTube</li></ul>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="copy-text">© 2026 NEXO AVIONIX · Summer Ocean Breeze</div>
+        <div class="footer-bottom-nav">
+          <a href="#">Términos</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Soporte</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

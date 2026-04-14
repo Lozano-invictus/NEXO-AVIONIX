@@ -1,0 +1,65 @@
+<div id="register-view" class="view auth-view">
+  <nav class="auth-navbar">
+    <div class="brand-logo">
+      <svg viewBox="0 0 24 24" class="logo-svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span>NEXO <b>AVIONIX</b></span>
+    </div>
+  </nav>
+  <div class="auth-content">
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <h1>Crea tu<br><span>Cuenta</span></h1>
+        <div class="brand-tag">NEXO AVIONIX</div>
+        <p>Únete a la red más avanzada de gestión aérea nacional.</p>
+        <div class="auth-features-mini">
+          <div class="feat-item"><span>✓</span> Acceso exclusivo</div>
+          <div class="feat-item"><span>✓</span> Beneficios VIP</div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form-container">
+        <div class="form-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <h2>Registro</h2>
+        <p class="form-desc">Crea tu cuenta gratis en pocos segundos.</p>
+        <form id="register-form" class="refined-form">
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label>Nombre</label>
+              <div class="input-wrapper-simple">
+                <input type="text" id="reg-name" placeholder="Juan" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Apellido</label>
+              <div class="input-wrapper-simple">
+                <input type="text" placeholder="Pérez" required />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="reg-email" placeholder="juan@correo.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="input-wrapper">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="reg-password" placeholder="Mínimo 8 caracteres" required />
+              <button type="button" class="pw-toggle" id="toggle-reg-pw">👁</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-brand">CREAR CUENTA</button>
+          <div class="auth-footer">
+            <p>¿Ya tienes cuenta? <a href="#" id="back-to-login">Inicia sesión</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

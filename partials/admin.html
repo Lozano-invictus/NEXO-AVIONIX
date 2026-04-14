@@ -1,0 +1,230 @@
+<div id="admin-view" class="view">
+  <header class="admin-topbar">
+    <div class="admin-topbar-left">
+      <span class="admin-logo-mark">✈</span>
+      <div>
+        <strong class="admin-logo-text">NEXO AVIONIX</strong>
+        <span class="admin-logo-sub">Panel de operaciones</span>
+      </div>
+    </div>
+    <div class="admin-topbar-right">
+      <button type="button" class="admin-icon-btn" title="Notificaciones" aria-label="Notificaciones">🔔</button>
+      <div class="admin-user-chip">
+        <div class="admin-user-ava" id="admin-user-ava">A</div>
+        <div>
+          <div id="admin-user-name" class="admin-user-name">Admin</div>
+          <div id="admin-user-role" class="admin-user-role">Superadministrador</div>
+        </div>
+      </div>
+      <button type="button" id="btn-exit-to-public" class="btn-admin-ghost">Sitio público</button>
+      <button type="button" id="btn-logout-admin" class="btn-admin-primary">Salir</button>
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <nav class="admin-side-nav" aria-label="Módulos">
+        <button type="button" class="admin-sidebar-link active" data-panel="dash"><span class="si">◉</span> Dashboard</button>
+        <button type="button" class="admin-sidebar-link" data-panel="flights"><span class="si">✈</span> Vuelos</button>
+        <button type="button" class="admin-sidebar-link" data-panel="aircraft"><span class="si">▣</span> Aeronaves</button>
+        <button type="button" class="admin-sidebar-link" data-panel="routes"><span class="si">〰</span> Rutas</button>
+        <button type="button" class="admin-sidebar-link" data-panel="users"><span class="si">👤</span> Usuarios</button>
+        <button type="button" class="admin-sidebar-link" data-panel="packages"><span class="si">📦</span> Paquetes</button>
+        <button type="button" class="admin-sidebar-link" data-panel="bookings"><span class="si">🎫</span> Reservas</button>
+        <button type="button" class="admin-sidebar-link" data-panel="pqrs"><span class="si">📩</span> PQRs</button>
+        <button type="button" class="admin-sidebar-link" data-panel="reports"><span class="si">📊</span> Reportes</button>
+        <button type="button" class="admin-sidebar-link" data-panel="settings"><span class="si">⚙</span> Configuración</button>
+      </nav>
+      <div class="admin-side-foot">Summer Ocean Breeze · v3</div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section id="admin-panel-dash" class="admin-panel active">
+        <div class="admin-page-head">
+          <h1>Resumen operativo</h1>
+          <p>Vista general de la aerolínea</p>
+        </div>
+        <div class="admin-stat-row">
+          <div class="admin-stat-card">
+            <span class="st-label">Vuelos activos</span>
+            <strong class="st-val" id="stat-active-flights">0</strong>
+            <span class="st-hint">En operación</span>
+          </div>
+          <div class="admin-stat-card">
+            <span class="st-label">Reservas totales</span>
+            <strong class="st-val" id="stat-total-bookings">0</strong>
+            <span class="st-hint">Todas las reservas</span>
+          </div>
+          <div class="admin-stat-card">
+            <span class="st-label">Ingresos cobrados</span>
+            <strong class="st-val" id="stat-revenue">$0</strong>
+            <span class="st-hint">COP (pagadas)</span>
+          </div>
+        </div>
+        <div class="admin-dash-grid">
+          <div class="admin-card">
+            <h3>Estado de red</h3>
+            <div class="mock-chart mock-bars"><span></span><span></span><span></span><span></span><span></span></div>
+            <p class="admin-muted">Volumen de vuelos por semana (demo visual)</p>
+          </div>
+          <div class="admin-card">
+            <h3>Distribución</h3>
+            <div class="mock-donut"></div>
+            <ul class="legend-mini"><li><i class="lg g"></i> A tiempo</li><li><i class="lg y"></i> Retraso</li><li><i class="lg r"></i> Cancelado</li></ul>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <h3>Actividad reciente</h3>
+          <table class="admin-table">
+            <thead><tr><th>Vuelo</th><th>Ruta</th><th>Hora</th><th>Estado</th></tr></thead>
+            <tbody id="dash-recent-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== VUELOS ===== -->
+      <section id="admin-panel-flights" class="admin-panel">
+        <div class="admin-page-head admin-row-head">
+          <div>
+            <h1>Gestión de vuelos</h1>
+            <p>Crear, editar y eliminar vuelos de la red Nexo</p>
+          </div>
+          <button type="button" id="btn-new-flight" class="btn-admin-primary">+ Crear vuelo</button>
+        </div>
+        <div class="admin-toolbar">
+          <input type="search" class="admin-search" placeholder="Buscar por código o ruta…" id="admin-flight-search" />
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="admin-flights-table">
+            <thead>
+              <tr><th>Vuelo</th><th>Origen</th><th>Destino</th><th>Salida</th><th>Llegada</th><th>Aeronave</th><th>Precio</th><th>Estado</th><th></th></tr>
+            </thead>
+            <tbody id="admin-flights-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== AERONAVES ===== -->
+      <section id="admin-panel-aircraft" class="admin-panel">
+        <div class="admin-page-head"><h1>Aeronaves</h1><p>Flota y mantenimiento</p></div>
+        <div class="admin-stat-row admin-stat-row--sm">
+          <div class="admin-stat-card sm"><span class="st-label">Total flota</span><strong>18</strong></div>
+          <div class="admin-stat-card sm"><span class="st-label">Operativas</span><strong>15</strong></div>
+          <div class="admin-stat-card sm"><span class="st-label">Mantenimiento</span><strong>2</strong></div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Modelo</th><th>Matrícula</th><th>Capacidad</th><th>Estado</th><th>Último MX</th></tr></thead>
+            <tbody>
+              <tr><td>Boeing 737-800</td><td>HK-4512</td><td>189</td><td><span class="badge badge-ok">Activa</span></td><td>12/01/2026</td></tr>
+              <tr><td>Airbus A320neo</td><td>HK-8820</td><td>186</td><td><span class="badge badge-warn">MRO</span></td><td>28/11/2025</td></tr>
+              <tr><td>Boeing 737-MAX8</td><td>HK-5501</td><td>178</td><td><span class="badge badge-ok">Activa</span></td><td>05/02/2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== RUTAS ===== -->
+      <section id="admin-panel-routes" class="admin-panel">
+        <div class="admin-page-head"><h1>Rutas</h1><p>Tarifas base y distancias</p></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID</th><th>Origen</th><th>Destino</th><th>Dist. km</th><th>Duración</th><th>Precio base</th></tr></thead>
+            <tbody>
+              <tr><td>R-BOG-CTG</td><td>Bogotá</td><td>Cartagena</td><td>1.054</td><td>1h 30m</td><td>$189.000</td></tr>
+              <tr><td>R-BOG-ADZ</td><td>Bogotá</td><td>San Andrés</td><td>1.783</td><td>2h 15m</td><td>$310.000</td></tr>
+              <tr><td>R-MDE-SMR</td><td>Medellín</td><td>Santa Marta</td><td>680</td><td>1h 30m</td><td>$245.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== USUARIOS ===== -->
+      <section id="admin-panel-users" class="admin-panel">
+        <div class="admin-page-head"><h1>Usuarios y personal</h1><p>Roles de aerolínea</p></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Nombre</th><th>ID</th><th>Rol</th><th>Estado</th><th>Contacto</th></tr></thead>
+            <tbody>
+              <tr><td>Ana López</td><td>NX-EMP-001</td><td>Piloto</td><td><span class="badge badge-ok">Activo</span></td><td>ana@nexoavionix.com</td></tr>
+              <tr><td>Carlos Ruiz</td><td>NX-EMP-044</td><td>Suelo</td><td><span class="badge badge-ok">Activo</span></td><td>carlos@nexoavionix.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PAQUETES ===== -->
+      <section id="admin-panel-packages" class="admin-panel">
+        <div class="admin-page-head admin-row-head">
+          <div>
+            <h1>Paquetes turísticos</h1>
+            <p>Crear y gestionar ofertas combinadas</p>
+          </div>
+          <button type="button" id="btn-new-package" class="btn-admin-primary">+ Crear paquete</button>
+        </div>
+        <div class="admin-pkg-admin-grid" id="admin-packages-grid">
+          <!-- Renderizado dinámico por render.js -->
+        </div>
+      </section>
+
+      <!-- ===== RESERVAS ===== -->
+      <section id="admin-panel-bookings" class="admin-panel">
+        <div class="admin-page-head">
+          <h1>Reservas</h1>
+          <p>Gestión centralizada de todas las reservas</p>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID</th><th>Cliente</th><th>Vuelo</th><th>Ruta</th><th>Fecha</th><th>Pago</th><th>Total</th><th></th></tr></thead>
+            <tbody id="admin-bookings-tbody">
+              <!-- Renderizado dinámico por render.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PQRs ===== -->
+      <section id="admin-panel-pqrs" class="admin-panel">
+        <div class="admin-page-head">
+          <h1>PQRs</h1>
+          <p>Peticiones, quejas, reclamos y solicitudes</p>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Asunto</th><th>Fecha</th><th>Estado</th><th></th></tr></thead>
+            <tbody id="admin-pqrs-tbody">
+              <!-- Renderizado dinámico por render.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== REPORTES ===== -->
+      <section id="admin-panel-reports" class="admin-panel">
+        <div class="admin-page-head"><h1>Reportes</h1><p>Analítica y finanzas (demo)</p></div>
+        <div class="admin-dash-grid">
+          <div class="admin-card"><h3>Ingresos</h3><div class="mock-chart mock-line"></div></div>
+          <div class="admin-card"><h3>Pasajeros</h3><div class="mock-chart mock-bars low"></div></div>
+        </div>
+      </section>
+
+      <!-- ===== CONFIGURACIÓN ===== -->
+      <section id="admin-panel-settings" class="admin-panel">
+        <div class="admin-page-head"><h1>Configuración</h1><p>Parámetros del sistema</p></div>
+        <div class="admin-settings-form">
+          <div class="form-row-admin"><label>Zona horaria</label><select><option>America/Bogota</option></select></div>
+          <div class="form-row-admin"><label>Moneda display</label><select><option>COP</option><option>USD</option></select></div>
+          <div class="form-row-admin"><label>Alertas por email</label><button type="button" class="toggle fake-on" aria-pressed="true">Activado</button></div>
+          <div class="form-row-admin"><label>Mantenimiento programado</label><button type="button" class="toggle" aria-pressed="false">Desactivado</button></div>
+          <div class="form-row-admin form-row-admin--danger">
+            <label>Restablecer datos demo</label>
+            <button type="button" class="btn-admin-ghost sm danger-ghost" id="btn-reset-state">Restablecer</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
