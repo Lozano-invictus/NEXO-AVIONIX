@@ -11,6 +11,8 @@ import {
   canCreatePackage, canEditPackage, canDeletePackage,
   canManageBooking, canManagePQR, canDeleteFlight
 } from "./permissions.js";
+import { updateCharts } from "./charts.js";
+import { initCarousel } from "./carousel.js";
 
 /* ================================================================
    HELPER
@@ -217,6 +219,9 @@ export function renderDashboardStats() {
       return `<tr><td>${f.id}</td><td>${f.origin} → ${f.dest}</td><td>${f.dep}</td><td><span class="badge ${st.cls}">${st.label}</span></td></tr>`;
     }).join("");
   }
+
+  // Actualizar gráficos en tiempo real
+  updateCharts();
 }
 
 /* ================================================================
@@ -323,6 +328,52 @@ export function renderAdminPQRsTable() {
 }
 
 /* ================================================================
+   ADMIN — Nuevas Tablas (Aeronaves, Rutas, Usuarios)
+   ================================================================ */
+export function renderAdminAircraftTable() {
+  const tb = document.getElementById("admin-aircraft-tbody");
+  if (!tb) return;
+  tb.innerHTML = state.aircraft.map(a => `
+    <tr>
+      <td>${a.model}</td>
+      <td><strong>${a.id}</strong></td>
+      <td>${a.capacity} pax</td>
+      <td><span class="badge ${a.status === 'active' ? 'badge-ok' : 'badge-warn'}">${a.status.toUpperCase()}</span></td>
+      <td>${a.lastMx}</td>
+    </tr>
+  `).join("");
+}
+
+export function renderAdminRoutesTable() {
+  const tb = document.getElementById("admin-routes-tbody");
+  if (!tb) return;
+  tb.innerHTML = state.routes.map(r => `
+    <tr>
+      <td><strong>${r.id}</strong></td>
+      <td>${r.origin}</td>
+      <td>${r.dest}</td>
+      <td>${r.dist.toLocaleString()}</td>
+      <td>${r.duration}</td>
+      <td>${formatCOP(r.basePrice)}</td>
+    </tr>
+  `).join("");
+}
+
+export function renderAdminUsersTable() {
+  const tb = document.getElementById("admin-users-tbody");
+  if (!tb) return;
+  tb.innerHTML = state.users.map(u => `
+    <tr>
+      <td><strong>${u.name}</strong></td>
+      <td>${u.id}</td>
+      <td>${u.role}</td>
+      <td><span class="badge ${u.status === 'active' ? 'badge-ok' : 'badge-warn'}">${u.status}</span></td>
+      <td>${u.email}</td>
+    </tr>
+  `).join("");
+}
+
+/* ================================================================
    SUSCRIPCIONES — Escucha cambios y re-renderiza
    ================================================================ */
 export function initRender() {
@@ -348,7 +399,12 @@ export function initRender() {
     renderAdminPQRsTable();
   });
 
+  subscribe("aircraft", renderAdminAircraftTable);
+  subscribe("routes",   renderAdminRoutesTable);
+  subscribe("users",    renderAdminUsersTable);
+
   /* Render inicial */
+  initCarousel();
   renderPopularDestinations();
   renderPackageCards();
   renderDashboardStats();

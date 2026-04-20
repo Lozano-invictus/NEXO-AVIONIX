@@ -89,6 +89,30 @@ const DEFAULT_PQRS = [
   { id: "PQR-002", client: "Carlos Ruiz", clientEmail: "carlos@correo.com", type: "Petición", subject: "Cambio de fecha de reserva", message: "Necesito cambiar mi reserva BK-90013 al 20 de abril.", status: "open", date: "2026-03-30", response: "" }
 ];
 
+const DEFAULT_AIRCRAFT = [
+  { model: "Boeing 737-800", id: "HK-4512", capacity: 189, status: "active", lastMx: "2026-01-12" },
+  { model: "Airbus A320neo", id: "HK-8820", capacity: 186, status: "mro",    lastMx: "2025-11-28" },
+  { model: "Boeing 737-MAX8",id: "HK-5501", capacity: 178, status: "active", lastMx: "2026-02-05" },
+  { model: "Airbus A320neo", id: "HK-8825", capacity: 186, status: "active", lastMx: "2026-03-10" },
+  { model: "Embraer 190",    id: "HK-2210", capacity: 100, status: "active", lastMx: "2026-02-28" }
+];
+
+const DEFAULT_ROUTES = [
+  { id: "R-BOG-CTG", origin: "Bogotá", dest: "Cartagena", dist: 1054, duration: "1h 30m", basePrice: 189000 },
+  { id: "R-BOG-ADZ", origin: "Bogotá", dest: "San Andrés", dist: 1783, duration: "2h 15m", basePrice: 310000 },
+  { id: "R-MDE-SMR", origin: "Medellín", dest: "Santa Marta", dist: 680, duration: "1h 30m", basePrice: 245000 },
+  { id: "R-CLO-BOG", origin: "Cali", dest: "Bogotá", dist: 480, duration: "1h 05m", basePrice: 155000 },
+  { id: "R-BOG-MDE", origin: "Bogotá", dest: "Medellín", dist: 420, duration: "1h 05m", basePrice: 120000 }
+];
+
+const DEFAULT_USERS = [
+  { name: "Ana López", id: "NX-EMP-001", role: "Piloto", status: "active", email: "ana@nexoavionix.com" },
+  { name: "Carlos Ruiz", id: "NX-EMP-044", role: "Suelo", status: "active", email: "carlos@nexoavionix.com" },
+  { name: "Diana Marín", id: "NX-EMP-012", role: "Tripulante", status: "active", email: "diana@nexoavionix.com" },
+  { name: "Pedro Soto", id: "NX-EMP-088", role: "Mantenimiento", status: "vacation", email: "pedro@nexoavionix.com" }
+];
+
+
 /* ── localStorage keys ── */
 const LS_KEY = "nexo_avionix_state";
 
@@ -106,7 +130,10 @@ function saveToStorage() {
       adminFlights: state.adminFlights,
       packages:     state.packages,
       bookings:     state.bookings,
-      pqrs:         state.pqrs
+      pqrs:         state.pqrs,
+      aircraft:     state.aircraft,
+      routes:       state.routes,
+      users:        state.users
     };
     localStorage.setItem(LS_KEY, JSON.stringify(snap));
   } catch { /* quota exceeded – silently fail */ }
@@ -122,6 +149,9 @@ export const state = {
   packages:     stored?.packages     ?? structuredClone(DEFAULT_PACKAGES),
   bookings:     stored?.bookings     ?? structuredClone(DEFAULT_BOOKINGS),
   pqrs:         stored?.pqrs         ?? structuredClone(DEFAULT_PQRS),
+  aircraft:     stored?.aircraft     ?? structuredClone(DEFAULT_AIRCRAFT),
+  routes:       stored?.routes       ?? structuredClone(DEFAULT_ROUTES),
+  users:        stored?.users        ?? structuredClone(DEFAULT_USERS),
 
   bookingData: {
     origin: "", originLabel: "",
@@ -185,8 +215,14 @@ export function resetState() {
   state.packages     = structuredClone(DEFAULT_PACKAGES);
   state.bookings     = structuredClone(DEFAULT_BOOKINGS);
   state.pqrs         = structuredClone(DEFAULT_PQRS);
+  state.aircraft     = structuredClone(DEFAULT_AIRCRAFT);
+  state.routes       = structuredClone(DEFAULT_ROUTES);
+  state.users        = structuredClone(DEFAULT_USERS);
   notify("flights");
   notify("packages");
   notify("bookings");
   notify("pqrs");
+  notify("aircraft");
+  notify("routes");
+  notify("users");
 }

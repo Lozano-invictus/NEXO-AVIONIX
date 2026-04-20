@@ -65,14 +65,18 @@
         </div>
         <div class="admin-dash-grid">
           <div class="admin-card">
-            <h3>Estado de red</h3>
-            <div class="mock-chart mock-bars"><span></span><span></span><span></span><span></span><span></span></div>
-            <p class="admin-muted">Volumen de vuelos por semana (demo visual)</p>
+            <h3>Volumen de vuelos</h3>
+            <div class="chart-container" style="height: 200px; position: relative;">
+              <canvas id="chart-flights"></canvas>
+            </div>
+            <p class="admin-muted">Vuelos por estado (Programados vs Aire)</p>
           </div>
           <div class="admin-card">
-            <h3>Distribución</h3>
-            <div class="mock-donut"></div>
-            <ul class="legend-mini"><li><i class="lg g"></i> A tiempo</li><li><i class="lg y"></i> Retraso</li><li><i class="lg r"></i> Cancelado</li></ul>
+            <h3>Distribución de reservas</h3>
+            <div class="chart-container" style="height: 200px; position: relative;">
+              <canvas id="chart-bookings"></canvas>
+            </div>
+            <ul class="legend-mini" id="bookings-legend"></ul>
           </div>
         </div>
         <div class="admin-table-wrap">
@@ -117,10 +121,8 @@
         <div class="admin-table-wrap">
           <table class="admin-table">
             <thead><tr><th>Modelo</th><th>Matrícula</th><th>Capacidad</th><th>Estado</th><th>Último MX</th></tr></thead>
-            <tbody>
-              <tr><td>Boeing 737-800</td><td>HK-4512</td><td>189</td><td><span class="badge badge-ok">Activa</span></td><td>12/01/2026</td></tr>
-              <tr><td>Airbus A320neo</td><td>HK-8820</td><td>186</td><td><span class="badge badge-warn">MRO</span></td><td>28/11/2025</td></tr>
-              <tr><td>Boeing 737-MAX8</td><td>HK-5501</td><td>178</td><td><span class="badge badge-ok">Activa</span></td><td>05/02/2026</td></tr>
+            <tbody id="admin-aircraft-tbody">
+              <!-- Renderizado dinámico -->
             </tbody>
           </table>
         </div>
@@ -132,10 +134,8 @@
         <div class="admin-table-wrap">
           <table class="admin-table">
             <thead><tr><th>ID</th><th>Origen</th><th>Destino</th><th>Dist. km</th><th>Duración</th><th>Precio base</th></tr></thead>
-            <tbody>
-              <tr><td>R-BOG-CTG</td><td>Bogotá</td><td>Cartagena</td><td>1.054</td><td>1h 30m</td><td>$189.000</td></tr>
-              <tr><td>R-BOG-ADZ</td><td>Bogotá</td><td>San Andrés</td><td>1.783</td><td>2h 15m</td><td>$310.000</td></tr>
-              <tr><td>R-MDE-SMR</td><td>Medellín</td><td>Santa Marta</td><td>680</td><td>1h 30m</td><td>$245.000</td></tr>
+            <tbody id="admin-routes-tbody">
+              <!-- Renderizado dinámico -->
             </tbody>
           </table>
         </div>
@@ -147,9 +147,8 @@
         <div class="admin-table-wrap">
           <table class="admin-table">
             <thead><tr><th>Nombre</th><th>ID</th><th>Rol</th><th>Estado</th><th>Contacto</th></tr></thead>
-            <tbody>
-              <tr><td>Ana López</td><td>NX-EMP-001</td><td>Piloto</td><td><span class="badge badge-ok">Activo</span></td><td>ana@nexoavionix.com</td></tr>
-              <tr><td>Carlos Ruiz</td><td>NX-EMP-044</td><td>Suelo</td><td><span class="badge badge-ok">Activo</span></td><td>carlos@nexoavionix.com</td></tr>
+            <tbody id="admin-users-tbody">
+              <!-- Renderizado dinámico -->
             </tbody>
           </table>
         </div>
@@ -203,10 +202,20 @@
 
       <!-- ===== REPORTES ===== -->
       <section id="admin-panel-reports" class="admin-panel">
-        <div class="admin-page-head"><h1>Reportes</h1><p>Analítica y finanzas (demo)</p></div>
+        <div class="admin-page-head"><h1>Reportes</h1><p>Analítica y finanzas detalladas</p></div>
         <div class="admin-dash-grid">
-          <div class="admin-card"><h3>Ingresos</h3><div class="mock-chart mock-line"></div></div>
-          <div class="admin-card"><h3>Pasajeros</h3><div class="mock-chart mock-bars low"></div></div>
+          <div class="admin-card">
+            <h3>Ingresos proyectados</h3>
+            <div class="chart-container" style="height: 250px; position: relative;">
+              <canvas id="chart-reports-revenue"></canvas>
+            </div>
+          </div>
+          <div class="admin-card">
+            <h3>Ocupación de Aeronaves</h3>
+            <div class="chart-container" style="height: 250px; position: relative;">
+              <canvas id="chart-reports-occupancy"></canvas>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -105,6 +105,11 @@
 .admin-card h3 { font-size: 1rem; color: var(--oxford-navy); margin-bottom: 20px; }
 .admin-muted { font-size: 13px; color: var(--text-dim); margin-top: 16px; }
 
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
 .mock-chart { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding-top: 20px; }
 .mock-bars span {
   flex: 1; background: linear-gradient(180deg, var(--frosted-blue), var(--cerulean)); border-radius: 6px 6px 0 0;
