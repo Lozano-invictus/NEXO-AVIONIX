@@ -303,6 +303,31 @@ export function renderAdminPackagesGrid() {
 }
 
 /* ================================================================
+   ADMIN — Tabla de PQRs
+   ================================================================ */
+export function renderAdminPQRsTable() {
+  const tbody = document.getElementById("admin-pqrs-tbody");
+  if (!tbody) return;
+
+  const role = state.currentUser?.role;
+  tbody.innerHTML = state.pqrs.map((p) => {
+    const st = PQR_STATUS[p.status] || PQR_STATUS.open;
+    return `<tr data-pqrid="${p.id}">
+      <td><strong>${p.id}</strong></td>
+      <td>${p.client}</td>
+      <td>${p.type}</td>
+      <td>${p.subject}</td>
+      <td>${p.date || "—"}</td>
+      <td><span class="badge ${st.cls}">${st.label}</span></td>
+      <td>
+        ${canManagePQR(role) && p.status === "open" ? `<button type="button" class="admin-icon-action btn-respond-pqr" data-pqrid="${p.id}">Responder</button>` : ""}
+        ${p.status === "closed" ? `<button type="button" class="admin-icon-action btn-view-pqr" data-pqrid="${p.id}">Ver</button>` : ""}
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+/* ================================================================
    ADMIN — Nuevas Tablas (Aeronaves, Rutas, Usuarios)
    ================================================================ */
 export function renderAdminAircraftTable() {
