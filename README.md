@@ -46,7 +46,7 @@ _*this is a base Windows component*_
 
 Project Timeline: The project is being developed in sprints, allowing a progressive evolution from design to functional implementation of the system; currently, there are still components and tasks pending completion.
 
-Sprint 1: Figma Design and Initial Prototyping
+Sprint 1: Figma Design and Initial Prototyping, and Start of Code Development and Functional Structure
 
 Approximate duration: 1 month.
 
@@ -54,7 +54,7 @@ Start: Around the end of February.
 
 End: March 26, 2026.
 
-This sprint focuses on the design and visual validation of the system, with constant iterations in Figma due to adjustments in the user experience and redefinition of the visual identity. The initial deliverable focuses on the structural and visual definition of the system.
+This sprint focuses on the design and visual validation of the system, with constant iterations in Figma due to adjustments in the user experience and redefinition of the visual identity. The initial deliverable focuses on the structural and visual definition of the system.In this sprint, the system's code implementation began, based on the previously defined designs.
 
 *Start of the Figma design: initial development of application prototypes.
 
@@ -72,16 +72,6 @@ This sprint focuses on the design and visual validation of the system, with cons
 
 *Focus on quality and innovation: optimization of the visual proposal based on evaluation criteria.
 
-Sprint 2: Start of Code Development and Functional Structure
-
-Approximate duration: ------
-
-Start: March 26
-
-End: ---
-
-In this sprint, the system's code implementation began, based on the previously defined designs. The last commit was recorded on April 4, 2026.
-
 *Start of code development (March 26): implementation of the frontend.
 
 *Project structuring: organization in HTML, CSS, and JavaScript.
@@ -96,7 +86,7 @@ In this sprint, the system's code implementation began, based on the previously 
 
 *Current status: functional system at a visual level with simulated data.
 
-Sprint 3: Database
+Sprint 2: Database
 
 Approximate duration: ---
 
