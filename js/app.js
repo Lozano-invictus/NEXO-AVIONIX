@@ -5,6 +5,7 @@ import { bindUiHelpers } from "./ui.js";
 import { initAdmin } from "./admin.js";
 import { initRender, renderUserBookings } from "./render.js";
 import { state, subscribe, resetState } from "./state.js";
+import { initAdminCharts } from "./charts.js";
 
 function collectDomMaps() {
   const views = {
@@ -67,6 +68,7 @@ export function initApp() {
   bindUiHelpers();
   initAdmin();
   initRender();
+  initAdminCharts();
 
   /* Re-render user bookings on auth change */
   document.addEventListener("nexo:auth-updated", () => {
