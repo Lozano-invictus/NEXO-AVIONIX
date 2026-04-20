@@ -17,8 +17,12 @@ import {
 } from "./permissions.js";
 import {
   renderAdminFlightsTable, renderAdminPackagesGrid,
+
   renderAdminBookingsTable, renderAdminPQRsTable,
   renderAdminAircraftTable, renderAdminRoutesTable, renderAdminUsersTable
+
+  renderAdminBookingsTable, renderAdminPQRsTable
+
 } from "./render.js";
 
 /* ================================================================
@@ -340,6 +344,7 @@ export function initAdmin() {
     renderAdminAircraftTable();
     renderAdminRoutesTable();
     renderAdminUsersTable();
+
   });
 
   /* Sidebar navigation */
