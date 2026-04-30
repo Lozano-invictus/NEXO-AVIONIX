@@ -125,6 +125,7 @@ const DEFAULT_USERS = [
   { name: "Pedro Soto", id: "NX-EMP-088", role: "Mantenimiento", status: "vacation", email: "pedro@nexoavionix.com" }
 ];
 
+
 /* ── localStorage keys ── */
 const LS_KEY = "nexo_avionix_state";
 
