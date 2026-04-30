@@ -6,7 +6,7 @@
  * Al confirmar, crea una entrada en state.bookings y notifica.
  */
 
-import { state, notify, nextId, formatCOP } from "./state.js";
+import { state, notify, nextId, formatCOP, CITY_NAMES } from "./state.js";
 import { showStage, showView } from "./navigation.js";
 import { canUseBookingFlow } from "./permissions.js";
 import { renderFlightCards } from "./render.js";
@@ -19,6 +19,14 @@ function normalizeCode(str) {
   if (m) return m[1];
   const m2 = up.match(/\b([A-Z]{3})\b/);
   if (m2) return m2[1];
+  
+  // Try finding standard city names
+  for (const [code, name] of Object.entries(CITY_NAMES)) {
+    if (name.toUpperCase() === up || up.includes(name.toUpperCase())) {
+      return code;
+    }
+  }
+  
   return up.slice(0, 3) || "BOG";
 }
 
@@ -31,11 +39,14 @@ function updateResultsView() {
   /* renderFlightCards se encarga del DOM */
   renderFlightCards();
 
+  const oName = CITY_NAMES[o] || o;
+  const dName = CITY_NAMES[d] || d;
+
   const hint = document.getElementById("seats-route-hint");
-  if (hint) hint.textContent = `Elige asiento para tu vuelo ${o}–${d}.`;
+  if (hint) hint.textContent = `Elige asiento para tu vuelo ${oName}–${dName}.`;
 
   const routeMini = document.getElementById("summary-route-mini");
-  if (routeMini) routeMini.textContent = `${o} → ${d}`;
+  if (routeMini) routeMini.textContent = `${oName} → ${dName}`;
 }
 
 function syncSeatSummaryPricing() {
@@ -279,8 +290,16 @@ export function bindBookingHandlers() {
     if (!requireAuth("buscar y reservar vuelos")) return;
     const originInput = document.getElementById("search-origin")?.value?.trim() || "Bogotá";
     const destInput   = document.getElementById("search-dest")?.value?.trim() || "Cartagena";
-    state.bookingData.originLabel = originInput;
-    state.bookingData.destLabel   = destInput;
+    
+    const oCode = normalizeCode(originInput);
+    const dCode = normalizeCode(destInput);
+    
+    state.bookingData.originLabel = CITY_NAMES[oCode] || oCode;
+    state.bookingData.destLabel   = CITY_NAMES[dCode] || dCode;
+    
+    // Autofill actual inputs back to ensure clean formatting
+    if (document.getElementById("search-origin")) document.getElementById("search-origin").value = state.bookingData.originLabel;
+    if (document.getElementById("search-dest")) document.getElementById("search-dest").value = state.bookingData.destLabel;
     state.bookingData.dateOut     = document.getElementById("search-date-out")?.value || "";
     state.bookingData.dateIn      =
       state.bookingData.tripType === "ow"

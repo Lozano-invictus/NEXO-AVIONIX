@@ -41,6 +41,33 @@ export function updateAuthState(user) {
     const admAva = document.getElementById("admin-user-ava");
     if (admAva) admAva.textContent = initial;
     toggleAdminShortcut(user);
+    
+    // Toggle sidebars based on exact role
+    const sNav = document.getElementById("superadmin-side-nav");
+    const aNav = document.getElementById("agent-side-nav");
+    const mCont = document.querySelector(".admin-main"); // The first one is superadmin
+    const aCont = document.getElementById("agent-main-container");
+    const roleBadge = document.getElementById("topbar-role-badge");
+    const topSub = document.getElementById("topbar-logo-sub");
+
+    if (sNav && aNav && aCont) {
+      if (user.role === ROLES.AGENT) {
+        sNav.style.display = "none";
+        aNav.style.display = "flex";
+        if (mCont) mCont.style.display = "none";
+        aCont.style.display = "block";
+        if (roleBadge) roleBadge.style.display = "inline-block";
+        if (topSub) topSub.textContent = "Gestión · Reservas · Vuelos";
+      } else {
+        sNav.style.display = "flex";
+        aNav.style.display = "none";
+        if (mCont) mCont.style.display = "block";
+        aCont.style.display = "none";
+        if (roleBadge) roleBadge.style.display = "none";
+        if (topSub) topSub.textContent = "Panel de operaciones";
+      }
+    }
+
   } else {
     loginHeader?.classList.remove("hidden");
     userSection?.classList.add("hidden");
@@ -73,7 +100,11 @@ export function bindAuthHandlers() {
 
     if (canAccessAdmin(role)) {
       showView("admin");
-      showAdminPanel("dash");
+      if (role === ROLES.AGENT) {
+        showAdminPanel("agent-dash");
+      } else {
+        showAdminPanel("dash");
+      }
       return;
     } else {
       showView("client");
@@ -140,6 +171,10 @@ export function bindAuthHandlers() {
 
   document.getElementById("btn-open-admin")?.addEventListener("click", () => {
     showView("admin");
-    showAdminPanel("dash");
+    if (state.currentUser?.role === ROLES.AGENT) {
+      showAdminPanel("agent-dash");
+    } else {
+      showAdminPanel("dash");
+    }
   });
 }

@@ -61,6 +61,7 @@ export function showAdminPanel(panelId) {
   document.querySelectorAll(".admin-sidebar-link").forEach((link) => {
     link.classList.toggle("active", link.dataset.panel === panelId);
   });
-  const main = document.querySelector(".admin-main");
-  if (main) main.scrollTop = 0;
+  document.querySelectorAll(".admin-main").forEach(main => {
+    if (main.style.display !== "none") main.scrollTop = 0;
+  });
 }

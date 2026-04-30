@@ -40,7 +40,16 @@ function collectDomMaps() {
     reports:  document.getElementById("admin-panel-reports"),
     bookings: document.getElementById("admin-panel-bookings"),
     pqrs:     document.getElementById("admin-panel-pqrs"),
-    settings: document.getElementById("admin-panel-settings")
+    settings: document.getElementById("admin-panel-settings"),
+    // Agent
+    "agent-dash":     document.getElementById("admin-panel-agent-dash"),
+    "agent-bookings": document.getElementById("admin-panel-agent-bookings"),
+    "agent-seats":    document.getElementById("admin-panel-agent-seats"),
+    "agent-payments": document.getElementById("admin-panel-agent-payments"),
+    "agent-support":  document.getElementById("admin-panel-agent-support"),
+    "agent-flights":  document.getElementById("admin-panel-agent-flights"),
+    "agent-tickets":  document.getElementById("admin-panel-agent-tickets"),
+    "agent-history":  document.getElementById("admin-panel-agent-history")
   };
 
   return { views, stages, adminPanels };

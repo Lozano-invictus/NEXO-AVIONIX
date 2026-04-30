@@ -3,8 +3,8 @@
     <div class="admin-topbar-left">
       <span class="admin-logo-mark">✈</span>
       <div>
-        <strong class="admin-logo-text">NEXO AVIONIX</strong>
-        <span class="admin-logo-sub">Panel de operaciones</span>
+        <strong class="admin-logo-text">NEXO AVIONIX <span id="topbar-role-badge" class="badge" style="display:none; margin-left: 8px; font-size:10px; background:#e2e8f0; color:#4a5568;">AGENTE</span></strong>
+        <span class="admin-logo-sub" id="topbar-logo-sub">Panel de operaciones</span>
       </div>
     </div>
     <div class="admin-topbar-right">
@@ -23,17 +23,82 @@
 
   <div class="admin-shell">
     <aside class="admin-sidebar">
-      <nav class="admin-side-nav" aria-label="Módulos">
-        <button type="button" class="admin-sidebar-link active" data-panel="dash"><span class="si">◉</span> Dashboard</button>
-        <button type="button" class="admin-sidebar-link" data-panel="flights"><span class="si">✈</span> Vuelos</button>
-        <button type="button" class="admin-sidebar-link" data-panel="aircraft"><span class="si">▣</span> Aeronaves</button>
-        <button type="button" class="admin-sidebar-link" data-panel="routes"><span class="si">〰</span> Rutas</button>
-        <button type="button" class="admin-sidebar-link" data-panel="users"><span class="si">👤</span> Usuarios</button>
-        <button type="button" class="admin-sidebar-link" data-panel="packages"><span class="si">📦</span> Paquetes</button>
-        <button type="button" class="admin-sidebar-link" data-panel="bookings"><span class="si">🎫</span> Reservas</button>
-        <button type="button" class="admin-sidebar-link" data-panel="pqrs"><span class="si">📩</span> PQRs</button>
-        <button type="button" class="admin-sidebar-link" data-panel="reports"><span class="si">📊</span> Reportes</button>
-        <button type="button" class="admin-sidebar-link" data-panel="settings"><span class="si">⚙</span> Configuración</button>
+      <nav id="superadmin-side-nav" class="admin-side-nav" aria-label="Módulos Superadmin">
+        <button type="button" class="admin-sidebar-link active" data-panel="dash">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+          Dashboard
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="flights">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M7 15h0M2 9.5h20"></path></svg></div>
+          Vuelos
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="aircraft">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.2 3L6 12l-5 5 1.5 1.5 5-5 2 3.5 3.3-1.2c.5-.2.8-.6.7-1.1L12 18l5.5-5.5 3.7 6.7z"></path></svg></div>
+          Aeronaves
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="routes">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div>
+          Rutas
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="users">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          Usuarios
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="packages">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg></div>
+          Paquetes
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="bookings">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+          Reservas
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="pqrs">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"></path><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"></path></svg></div>
+          PQRs
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="reports">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+          Reportes
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="settings">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+          Configuración
+        </button>
+      </nav>
+      
+      <nav id="agent-side-nav" class="admin-side-nav" aria-label="Módulos Agente" style="display: none;">
+        <button type="button" class="admin-sidebar-link active" data-panel="agent-dash">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+          Dashboard Agente
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-bookings">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+          Gestion Reservas
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-seats">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18v-6a6 6 0 0 1 12 0v6"></path><path d="M3 18h18"></path><path d="M10 21h4"></path></svg></div>
+          Asignacion Asientos
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-payments">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+          Confirmar Pagos
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-support">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+          Atencion Clientes
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-flights">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.2 3L6 12l-5 5 1.5 1.5 5-5 2 3.5 3.3-1.2c.5-.2.8-.6.7-1.1L12 18l5.5-5.5 3.7 6.7z"></path></svg></div>
+          Consultar Vuelos
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-tickets">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></div>
+          Mis Tiquetes
+        </button>
+        <button type="button" class="admin-sidebar-link" data-panel="agent-history">
+          <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+          Historial
+        </button>
       </nav>
       <div class="admin-side-foot">Summer Ocean Breeze · v3</div>
     </aside>
@@ -234,6 +299,200 @@
         </div>
       </section>
 
+    </main>
+
+    <main class="admin-main" id="agent-main-container" style="display: none;">
+      <!-- ===== AGENT DASHBOARD ===== -->
+      <section id="admin-panel-agent-dash" class="admin-panel">
+        <div class="admin-page-head">
+          <span class="admin-text-sm" style="color:var(--text-dim);">Panel Agente &gt; Dashboard</span>
+          <h1>Dashboard Agente</h1>
+          <p id="agent-dash-subtitle">Resumen de actividad - Agente - Hoy</p>
+        </div>
+        
+        <div class="admin-stat-row">
+          <div class="admin-stat-card agent-stat-card border-top-blue">
+            <span class="st-icon badge" style="background:#eaf6f6;color:var(--cerulean);margin-bottom:8px;">[R]</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <span class="st-label">Mis Reservas Hoy</span>
+              </div>
+              <div style="text-align:right;">
+                <strong class="st-val">28</strong>
+                <span class="st-hint" style="color:#a0aec0;">+ 5 nuevas</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-stat-card agent-stat-card border-top-red">
+            <span class="st-icon badge badge-bad" style="margin-bottom:8px;">[P]</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <span class="st-label">Pagos Pendientes</span>
+              </div>
+              <div style="text-align:right;">
+                <strong class="st-val">12</strong>
+                <span class="st-hint" style="color:#e53e3e;">Confirmar</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-stat-card agent-stat-card border-top-red">
+            <span class="st-icon badge badge-bad" style="margin-bottom:8px;">[A]</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <span class="st-label">Asientos por Asignar</span>
+              </div>
+              <div style="text-align:right;">
+                <strong class="st-val">8</strong>
+                <span class="st-hint" style="color:#e53e3e;">Urgentes</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-stat-card agent-stat-card border-top-blue">
+            <span class="st-icon badge" style="background:#eaf6f6;color:var(--cerulean);margin-bottom:8px;">[C]</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <span class="st-label">Solicitudes Clientes</span>
+              </div>
+              <div style="text-align:right;">
+                <strong class="st-val">4</strong>
+                <span class="st-hint" style="color:#a0aec0;">Hoy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-dash-2x2">
+          <!-- Vuelos Activos -->
+          <div class="admin-table-wrap mt-0">
+            <h3>Vuelos Activos Hoy - Mi Turno <br><span style="font-size:12px; font-weight:400; color:#718096">Vuelos asignados al agente</span></h3>
+            <table class="admin-table agent-condensed-table">
+              <thead><tr><th>CODIGO</th><th>RUTA</th><th>SALIDA</th><th>ESTADO</th><th>PAX</th><th>ACCION</th></tr></thead>
+              <tbody id="agent-dash-flights-tbody"></tbody>
+            </table>
+          </div>
+          <!-- Pagos Pendientes -->
+          <div class="admin-table-wrap mt-0">
+            <h3>Pagos Pendientes - Accion Requerida <br><span style="font-size:12px; font-weight:400; color:#718096">Reservas que requieren confirmacion de pago</span></h3>
+            <table class="admin-table agent-condensed-table">
+              <thead><tr><th>ID RESERVA</th><th>CLIENTE</th><th>TOTAL</th><th>ESPERA</th><th>ACC</th></tr></thead>
+              <tbody id="agent-dash-payments-tbody"></tbody>
+            </table>
+          </div>
+          <!-- Asientos -->
+          <div class="admin-table-wrap mt-0">
+            <h3>Asientos por Asignar <br><span style="font-size:12px; font-weight:400; color:#718096">Pasajeros con reserva confirmada sin asiento</span></h3>
+            <table class="admin-table agent-condensed-table">
+              <thead><tr><th>ID TKT</th><th>PASAJERO</th><th>VUELO</th><th>CLASE</th><th>ASIENTO</th><th>ACC</th></tr></thead>
+              <tbody id="agent-dash-seats-tbody"></tbody>
+            </table>
+          </div>
+          <!-- Solicitudes -->
+          <div class="admin-table-wrap mt-0">
+            <h3>Solicitudes de Clientes <br><span style="font-size:12px; font-weight:400; color:#718096">Atencion y soporte a clientes del dia</span></h3>
+            <table class="admin-table agent-condensed-table">
+              <thead><tr><th>CLIENTE</th><th>TIPO</th><th>VUELO</th><th>HORA</th><th>ACC</th></tr></thead>
+              <tbody id="agent-dash-support-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== AGENT GESTION RESERVAS ===== -->
+      <section id="admin-panel-agent-bookings" class="admin-panel">
+        <div class="admin-page-head">
+          <span class="admin-text-sm" style="color:var(--text-dim);">Panel Agente &gt; Gestion Reservas</span>
+          <h1>Gestion de Reservas</h1>
+          <p>Consultar, confirmar, modificar y cancelar reservas</p>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID RESERVA</th><th>CLIENTE</th><th>VUELO</th><th>FECHA</th><th>TOTAL</th><th>TKT</th><th>PKG</th><th>ESTADO</th><th>PAGO</th><th>ACC</th></tr></thead>
+            <tbody id="agent-bookings-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== AGENT ASIGNAR ASIENTOS ===== -->
+      <section id="admin-panel-agent-seats" class="admin-panel">
+        <div class="admin-page-head">
+          <span class="admin-text-sm" style="color:var(--text-dim);">Panel Agente &gt; Asignacion de Asientos</span>
+          <h1>Asignacion de Asientos</h1>
+          <p>Asignar y reasignar asientos a pasajeros con reserva confirmada</p>
+        </div>
+        
+        <div class="agent-flight-filter" style="display:flex; gap:16px; align-items:center; background:#fff; padding:16px; border-radius:12px; border:1px solid #dce5eb; margin-bottom:24px;">
+          <label>Vuelo:</label> <input type="text" value="NA-1234 BOG->CTG" readonly style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px; border-radius:6px; flex:1;">
+          <label>Fecha:</label> <input type="text" value="Hoy" readonly style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px; border-radius:6px; width:120px;">
+          <span class="badge badge-warn" style="font-size:12px; padding:6px 12px;">Programado</span>
+          <button class="btn-admin-primary" style="margin-left:auto;">Cargar vuelo</button>
+        </div>
+
+        <div class="agent-seats-grid" style="display: grid; grid-template-columns: 1fr 380px; gap: 24px;">
+          <div class="seat-map-container" style="background:#eaf6f6; border-radius:12px; padding:24px; border:1px solid #b2dfdf;">
+            <h3 style="margin-top:0; color:var(--oxford-navy);">Mapa de Asientos - NA-1234 (Boeing 737-800)</h3>
+            <p style="font-size:13px; color:var(--text-dim); margin-bottom:16px;">180 asientos totales - 142 ocupados - 38 disponibles</p>
+            <div id="agent-interactive-seatmap" style="display:flex; flex-direction:column; gap:4px; max-width: 320px; margin: 0 auto; padding-right:16px;">
+              <!-- Javascript rendered seat map -->
+            </div>
+          </div>
+          <div class="seat-queue-container" style="background:#fff; border-radius:12px; padding:24px; border:1px solid #dce5eb;">
+            <h3 style="margin-top:0; color:var(--oxford-navy);">Pasajeros sin Asiento</h3>
+            <p style="font-size:13px; color:var(--text-dim); margin-bottom:16px;">Tiquetes confirmados - Asignacion pendiente</p>
+            <div class="queue-list" id="agent-unassigned-queue" style="display:flex; flex-direction:column; gap:12px;">
+              <!-- Dynamic queue -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== AGENT CONFIRMAR PAGOS ===== -->
+      <section id="admin-panel-agent-payments" class="admin-panel">
+        <div class="admin-page-head">
+          <span class="admin-text-sm" style="color:var(--text-dim);">Panel Agente &gt; Confirmar Pagos</span>
+          <h1>Confirmacion de Pagos</h1>
+          <p>Verificar y confirmar pagos de reservas pendientes</p>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>ID RESERVA</th><th>CLIENTE</th><th>METODO</th><th>REFERENCIA</th><th>VALOR</th><th>FECHA PAGO</th><th>ESTADO</th><th>ACC</th></tr></thead>
+            <tbody id="agent-payments-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== AGENT ATENCION CLIENTES ===== -->
+      <section id="admin-panel-agent-support" class="admin-panel">
+        <div class="admin-page-head">
+          <span class="admin-text-sm" style="color:var(--text-dim);">Panel Agente &gt; Atencion a Clientes</span>
+          <h1>Atencion a Clientes</h1>
+          <p>Gestionar solicitudes, cambios y soporte a pasajeros</p>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1fr; gap:24px;">
+           <div class="admin-table-wrap mt-0">
+            <table class="admin-table">
+              <thead><tr><th>CLIENTE</th><th>TIPO SOLICITUD</th><th>VUELO</th><th>DETALLE</th><th>PRIORIDAD</th><th>ACC</th></tr></thead>
+              <tbody id="agent-support-tbody"></tbody>
+            </table>
+          </div>
+          <div style="background:#fff; border-radius:12px; border:2px solid #e53e3e; padding:16px; display:none;" id="agent-active-chat-container">
+            <h3 style="margin:0 0 4px; color:var(--oxford-navy); border-bottom:1px solid #eee; padding-bottom:12px;" id="agent-chat-title">Atencion Activa - Usuario</h3>
+            <div id="agent-chat-thread" style="padding:16px 0; min-height:100px; max-height:250px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; font-size:13px;">
+            </div>
+            <div style="display:flex; gap:10px; margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
+              <button class="btn-admin-primary">Confirmar cambio</button>
+              <button class="btn-admin-ghost">Escalar caso</button>
+              <button class="btn-admin-ghost">Cerrar caso</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Empty defaults for the rest to avoid runtime errors -->
+      <section id="admin-panel-agent-flights" class="admin-panel"><div class="admin-page-head"><h1>Consultar Vuelos</h1></div></section>
+      <section id="admin-panel-agent-tickets" class="admin-panel"><div class="admin-page-head"><h1>Mis Tiquetes emitidos</h1></div></section>
+      <section id="admin-panel-agent-history" class="admin-panel"><div class="admin-page-head"><h1>Historial</h1></div></section>
+      
     </main>
   </div>
 </div>

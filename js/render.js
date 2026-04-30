@@ -6,7 +6,7 @@
  * Se suscribe al bus de eventos para re-renderizar automáticamente.
  */
 
-import { state, subscribe, formatCOP } from "./state.js";
+import { state, subscribe, formatCOP, CITY_NAMES } from "./state.js";
 import {
   canCreatePackage, canEditPackage, canDeletePackage,
   canManageBooking, canManagePQR, canDeleteFlight
@@ -66,7 +66,7 @@ export function renderFlightCards() {
     <div class="flight-card-refined" data-flight-select>
       <div class="card-left">
         <div class="time-block"><b>${f.dep}</b> — <b>${f.arr}</b> <span class="flight-duration" data-duration>~${calcDuration(f.dep, f.arr)}</span></div>
-        <div class="carrier-info"><span class="route-inline">${f.origin} → ${f.dest}</span> · Nexo Avionix · <strong>${f.id}</strong> · Económico</div>
+        <div class="carrier-info"><span class="route-inline">${CITY_NAMES[f.origin] || f.origin} → ${CITY_NAMES[f.dest] || f.dest}</span> · Nexo Avionix · <strong>${f.id}</strong> · Económico</div>
       </div>
       <div class="card-right">
         <div class="price-bubble" data-price-display>${formatCOP(f.price)}</div>
@@ -77,7 +77,7 @@ export function renderFlightCards() {
   /* Actualizar meta */
   const title = document.getElementById("results-route-title");
   const sub   = document.getElementById("results-route-sub");
-  if (title) title.textContent = `${o} → ${d}`;
+  if (title) title.textContent = `${CITY_NAMES[o] || o} → ${CITY_NAMES[d] || d}`;
   if (sub) {
     const n = state.bookingData.dateOut
       ? new Date(state.bookingData.dateOut + "T12:00:00").toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" })
@@ -328,7 +328,148 @@ export function renderAdminPQRsTable() {
 }
 
 /* ================================================================
-   ADMIN — Nuevas Tablas (Aeronaves, Rutas, Usuarios)
+   AGENT VIEWS
+   ================================================================ */
+export function renderAgentDash() {
+  const dashFlights = document.getElementById("agent-dash-flights-tbody");
+  if (!dashFlights) return; // If we're not on a page that supports agent dash
+
+  // Filter flights for today/active (mocked: all active)
+  const activeFlights = state.adminFlights.filter(f => f.status !== "cancelled");
+  dashFlights.innerHTML = activeFlights.slice(0,4).map(f => {
+    const st = STATUS_MAP[f.status] || STATUS_MAP.scheduled;
+    return `<tr><td><b>${f.id}</b></td><td>${f.origin}->${f.dest}</td><td>${f.dep}</td><td><span class="badge ${st.cls}">${st.label}</span></td><td>142/180</td><td><button class="btn-admin-ghost sm" data-panel="agent-flights">Detalle</button></td></tr>`;
+  }).join("");
+
+  const dashPayments = document.getElementById("agent-dash-payments-tbody");
+  const pendingPayments = state.bookings.filter(b => b.payment === "pending");
+  if(dashPayments) dashPayments.innerHTML = pendingPayments.slice(0,4).map(b => `<tr><td><b>${b.id}</b></td><td>${b.client}</td><td>${formatCOP(b.total)}</td><td><span style="color:#e53e3e">2h</span></td><td><button class="btn-admin-primary sm" data-panel="agent-payments">Revisar</button></td></tr>`).join("");
+
+  const dashSeats = document.getElementById("agent-dash-seats-tbody");
+  const missingSeats = state.bookings.filter(b => !b.seat || b.seat === "—" || b.seat === "");
+  if(dashSeats) dashSeats.innerHTML = missingSeats.slice(0,4).map(b => `<tr><td><b>${b.id}</b></td><td>${b.client}</td><td>${b.flightId}</td><td>Econ.</td><td><span class="badge badge-bad" style="background:#fff5f5; color:#c53030; border:1px solid #feb2b2;">Pendiente</span></td><td><button class="btn-admin-ghost sm" data-panel="agent-seats">Asignar</button></td></tr>`).join("");
+
+  const dashSupport = document.getElementById("agent-dash-support-tbody");
+  const openPqrs = state.pqrs.filter(p => p.status === "open");
+  if(dashSupport) dashSupport.innerHTML = openPqrs.slice(0,4).map(p => `<tr><td>${p.client}</td><td>${p.type}</td><td>---</td><td>${p.date}</td><td><button class="btn-admin-primary sm" data-panel="agent-support">Atender</button></td></tr>`).join("");
+
+  // Update Counters using the actual lengths from above filtered arrays
+  const setEl = (sel, val) => { const e = document.querySelector(sel); if(e) e.textContent = val; };
+  setEl(".agent-stat-card:nth-child(1) .st-val", state.bookings.length);
+  setEl(".agent-stat-card:nth-child(2) .st-val", pendingPayments.length);
+  setEl(".agent-stat-card:nth-child(3) .st-val", missingSeats.length);
+  setEl(".agent-stat-card:nth-child(4) .st-val", openPqrs.length);
+}
+
+export function renderAgentBookings() {
+  const tb = document.getElementById("agent-bookings-tbody");
+  if(!tb) return;
+  tb.innerHTML = state.bookings.map(b => {
+    const badge = PAYMENT_BADGE[b.payment] || PAYMENT_BADGE.pending;
+    return `<tr>
+      <td><b>${b.id}</b></td><td>${b.client}</td><td>${b.flightId || "—"}</td><td>${b.date || "—"}</td><td>${formatCOP(b.total)}</td>
+      <td>#19A</td><td>---</td><td><span class="badge badge-ok">Confirmada</span></td>
+      <td><span class="badge ${badge.cls}">${badge.label}</span></td>
+      <td><button class="btn-admin-ghost sm">Gestionar</button></td>
+    </tr>`;
+  }).join("");
+}
+
+export function renderAgentSeats() {
+  const container = document.getElementById("agent-interactive-seatmap");
+  if(!container) return;
+  
+  // Render an airplane map: 30 rows, columns ABC - DEF
+  // Based on current mock data flight 'NX-102' BOG -> CTG
+  const flightBookings = state.bookings.filter(b => b.flightId === "NX-102");
+  const occupiedSeats = new Set(flightBookings.map(b => b.seat).filter(Boolean));
+
+  let html = `<div style="display:flex; justify-content:space-between; margin-bottom: 2px;">
+    <div style="display:flex; gap:4px; font-size:10px; font-weight:bold; color:var(--oxford-navy); width:92px; justify-content:space-between;"><span>A</span><span>B</span><span>C</span></div>
+    <div style="display:flex; gap:4px; font-size:10px; font-weight:bold; color:var(--oxford-navy); width:92px; justify-content:space-between;"><span>D</span><span>E</span><span>F</span></div>
+  </div>`;
+  
+  for(let row=1; row<=20; row++) {
+    html += `<div style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; gap:4px;">`;
+    ["A","B","C"].forEach(col => {
+      const cls = occupiedSeats.has(`${row}${col}`) ? "oc" : "av";
+      html += `<span class="seatx ${cls}" data-seat="${row}${col}" title="Asiento ${row}${col}">${row}${col}</span>`;
+    });
+    html += `</div> <span style="font-size:10px; color:#a0aec0; width:16px; text-align:center;">${row}</span> <div style="display:flex; gap:4px;">`;
+    ["D","E","F"].forEach(col => {
+      const cls = occupiedSeats.has(`${row}${col}`) ? "oc" : "av";
+      html += `<span class="seatx ${cls}" data-seat="${row}${col}" title="Asiento ${row}${col}">${row}${col}</span>`;
+    });
+    html += `</div></div>`;
+  }
+  container.innerHTML = html;
+
+  // Render passengers without seat
+  const queue = document.getElementById("agent-unassigned-queue");
+  if(queue) {
+    const unassigned = state.bookings.filter(b => (!b.seat || b.seat==="—" || b.seat==="") && b.payment==="paid");
+    if(unassigned.length===0){
+       queue.innerHTML = `<p class="empty-state-msg" style="padding:16px 0;">No hay pasajeros pendientes.</p>`;
+    }else{
+       queue.innerHTML = unassigned.map(b => `
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="display:block; color:var(--oxford-navy); font-size:13px;">${b.client}</strong>
+            <span style="font-size:11px; color:var(--text-dim);">${b.id} - Económica</span>
+          </div>
+          <button class="btn-admin-ghost sm" onclick="alert('Selecciona un asiento verde del mapa para asignarlo.')">Asignar</button>
+        </div>`).join("");
+    }
+  }
+}
+
+export function renderAgentPayments() {
+  const tb = document.getElementById("agent-payments-tbody");
+  if(!tb) return;
+  const pending = state.bookings.filter(b => b.payment === "pending");
+  tb.innerHTML = pending.map(b => {
+    return `<tr>
+      <td><b>${b.id}</b></td><td>${b.client}</td><td>PSE</td><td>882193-XT</td>
+      <td><b>${formatCOP(b.total)}</b></td><td>--</td>
+      <td><span class="badge badge-warn">Verificar</span></td>
+      <td><button class="btn-admin-primary sm" onclick="alert('Funcionalidad de confirmación vinculada al backend.')">Aprobar</button></td>
+    </tr>`;
+  }).join("");
+}
+
+export function renderAgentSupport() {
+  const tb = document.getElementById("agent-support-tbody");
+  if(!tb) return;
+  tb.innerHTML = state.pqrs.map(p => {
+    return `<tr>
+      <td><b>${p.client}</b></td><td>${p.type}</td><td>${p.flightId || "NX-000"}</td>
+      <td style="max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.subject}</td>
+      <td><span class="badge ${p.status === 'open' ? 'badge-bad' : 'badge-ok'}">${p.status === 'open' ? 'Alta' : 'Baja'}</span></td>
+      <td><button class="btn-admin-ghost sm btn-open-chat" data-client="${p.client}" data-subj="${p.subject}">Ver Hilo</button></td>
+    </tr>`;
+  }).join("");
+
+  document.querySelectorAll(".btn-open-chat").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      document.getElementById("agent-active-chat-container").style.display = "block";
+      document.getElementById("agent-chat-title").textContent = `Atención Activa - ${e.target.dataset.client}`;
+      document.getElementById("agent-chat-thread").innerHTML = `
+        <div class="agent-chat-msg user">
+          <span class="chat-meta">${e.target.dataset.client} - 10:15 AM</span>
+          Hola, ${e.target.dataset.subj}. Por favor ayúdenme lo antes posible.
+        </div>
+        <div class="agent-chat-msg agent">
+          <span class="chat-meta">Agente - 10:20 AM</span>
+          Hola ${e.target.dataset.client}, entiendo la molestia. Estoy validando tus opciones de vuelo.
+        </div>
+      `;
+    });
+  });
+}
+
+/* ================================================================
+   NUEVAS TABLAS (Aeronaves, Rutas, Usuarios)
    ================================================================ */
 export function renderAdminAircraftTable() {
   const tb = document.getElementById("admin-aircraft-tbody");
@@ -382,6 +523,8 @@ export function initRender() {
     renderAdminFlightsTable(document.getElementById("admin-flight-search")?.value || "");
     renderDashboardStats();
     renderPopularDestinations();
+    renderAgentDash();
+    renderAgentSeats();
   });
 
   subscribe("packages", () => {
@@ -393,10 +536,16 @@ export function initRender() {
     renderUserBookings();
     renderAdminBookingsTable();
     renderDashboardStats();
+    renderAgentDash();
+    renderAgentBookings();
+    renderAgentSeats();
+    renderAgentPayments();
   });
 
   subscribe("pqrs", () => {
     renderAdminPQRsTable();
+    renderAgentDash();
+    renderAgentSupport();
   });
 
   subscribe("aircraft", renderAdminAircraftTable);
@@ -413,4 +562,11 @@ export function initRender() {
   renderAdminPackagesGrid();
   renderAdminPQRsTable();
   renderUserBookings();
+
+  // Initial Agent Renders
+  renderAgentDash();
+  renderAgentBookings();
+  renderAgentSeats();
+  renderAgentPayments();
+  renderAgentSupport();
 }

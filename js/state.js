@@ -6,6 +6,19 @@
  * Incluye bus de eventos y persistencia localStorage.
  */
 
+/* ── Ciudades ── */
+export const CITY_NAMES = {
+  "BOG": "Bogotá",
+  "CTG": "Cartagena",
+  "ADZ": "San Andrés",
+  "MDE": "Medellín",
+  "CLO": "Cali",
+  "BAQ": "Barranquilla",
+  "SMR": "Santa Marta",
+  "PEI": "Pereira",
+  "MZL": "Manizales"
+};
+
 /* ── Roles ── */
 export const ROLES = {
   CLIENT: "client",
