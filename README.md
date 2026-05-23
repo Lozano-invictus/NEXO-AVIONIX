@@ -109,7 +109,3 @@ This sprint represented a significant milestone in the project, as it establishe
 ## Current Project Status
 
 As of May 23, 2026, the project has completed the visual design phase, frontend structuring, and database design stage. The system currently has a functional visual interface, a defined relational structure, and a documented database architecture prepared for future integration and expansion.
-
-Current Project Status
-
-As of May 23, 2026, the project has completed the visual design phase, frontend structuring, and database design stage. The system currently has a functional visual interface, a defined relational structure, and a documented database architecture prepared for future integration and expansion.
